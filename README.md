@@ -45,4 +45,35 @@ scope.
 
 In templates, we reference variables with handlebars, 
 or `{{}}`. In our example, `{{name}}` in the view 
-references `$scope.name` in the controller. 
+references `$scope.name` in the controller. And if you've
+noticed, we created our first one-way binding! Essentially,
+our handlebars served as our instruction to let the scope
+update our view whenever the variable changes.
+
+Now that we're able to pass data from the controller to the
+view, how do we pass data from the view to controller? Angular 
+does this through directives which are two-way bindings.
+
+In order to pass the notes from the telephone back to our 
+controller, we'll use a directive called `ng-model`
+
+```html
+<script type="text/ng-template" id="telephone.html">
+  <h1>Call for {{name}}</h1>
+  <form class="telephone">
+    <input type="text" name="notes" ng-model="notes" />
+  </form>
+</script>
+```
+
+How does `ng-model` work? Well, lets trace its steps.
+
+1. Type a letter into the input
+2. Input has changed and notifies the scope of the change
+3. The scope then updates `$scope.notes` with the value of 
+   the field
+
+Now at first, this looks like a one-way binding, but if we
+were somehow able to change the value in the controller
+the input would update itself with the scope's value making
+it two ways.
